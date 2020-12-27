@@ -17,6 +17,7 @@ import com.sshProject.entity.Ers_reimbursement;
 import com.sshProject.entity.Ers_reimbursement_status;
 import com.sshProject.entity.Ers_users;
 import com.sshProject.service.ErsUserService;
+import com.sshProject.util.PassUtil;
 
 @Controller
 public class LoginAction {
@@ -76,7 +77,10 @@ public class LoginAction {
 			throws Exception {
 		// 调用service
 //		System.out.println(user);
+		String passMd5 = PassUtil.MD5EncodeUtf8(user.getErs_password());
+		user.setErs_password(passMd5);
 		List<Ers_users> u = ersUserService.loginUser(user);
+
 		// 判断
 		if (u.size() > 0) {// 成功
 			// 使用session域对象
