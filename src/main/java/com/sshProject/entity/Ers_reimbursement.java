@@ -1,5 +1,6 @@
 package com.sshProject.entity;
 
+import java.util.Arrays;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -131,6 +132,18 @@ public class Ers_reimbursement {
 
 	public void setReimb_status_id(Ers_reimbursement_status reimb_status_id) {
 		this.reimb_status_id = reimb_status_id;
+	}
+
+	@Override
+	public String toString() {
+		return "Ers_reimbursement [reimb_id=" + reimb_id + ", reimb_amount=" + reimb_amount + ", reimb_submitted="
+				+ reimb_submitted + ", reimb_resolved=" + reimb_resolved + ", reimb_description=" + reimb_description
+				+ ", receipt=" + Arrays.toString(receipt) + ", ers_author=" + ers_author + ", ers_resolver="
+				+ ers_resolver + ", reim_type_id=" + reim_type_id + ", reimb_status_id=" + reimb_status_id + "]";
+	}
+
+	public Ers_reimbursement() {
+		super();
 	}
 
 }

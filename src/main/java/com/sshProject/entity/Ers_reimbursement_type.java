@@ -30,4 +30,9 @@ public class Ers_reimbursement_type {
 		this.reimb_type = reimb_type;
 	}
 
+	@Override
+	public String toString() {
+		return "Ers_reimbursement_type [reimb_type_id=" + reimb_type_id + ", reimb_type=" + reimb_type + "]";
+	}
+
 }
