@@ -28,22 +28,18 @@
 
 			<form class="col-sm-12 col-lg-2 m-auto align-items-center"
 				action="${pageContext.request.contextPath }/add.action"
-				method="post">
+				method="post" enctype="multipart/form-data">
 				<div class="form-group">
-					<label style="font-size:30px;" for="reimb_amount">reimb_amount</label> <input type="text"
-						class="form-control" id="reimb_amount" name="reimb_amount">
+					<label style="font-size: 30px;" for="reimb_amount">reimb_amount</label>
+					<input type="text" class="form-control" id="reimb_amount"
+						name="reimb_amount">
 				</div>
 
-				<!-- 				<div class="form-group"> -->
-				<!-- 					<label for="reimb_amount">reim_type_id</label> <input type="text" -->
-				<!-- 						class="form-control" id="reimb_amount" -->
-				<!-- 						name="reim_type_id.reimb_type_id"> -->
-				<!-- 				</div> -->
 				<div class="form-group">
 
-					<label style="font-size:30px;">reim_type</label> <select
+					<label style="font-size: 30px;">reim_type</label> <select
 						class="form-control form-control-lg"
-						name="reim_type_id.reimb_type_id" >
+						name="reim_type_id.reimb_type_id">
 						<option value=0>lodging</option>
 						<option value=1>travel</option>
 						<option value=2>food</option>
@@ -52,15 +48,21 @@
 				</div>
 
 				<div class="form-group">
-					<label style="font-size:30px;" for="reimb_description">reimb_description</label> <input
-						type="text" class="form-control" id="reimb_description"
+					<label style="font-size: 30px;" for="reimb_description">reimb_description</label>
+					<input type="text" class="form-control" id="reimb_description"
 						name="reimb_description">
+				</div>
+
+				<div class="form-group">
+					<label style="font-size: 30px;" >receipt</label>
+					<input type="file" class="form-control" name="file" />
 				</div>
 
 				<div style="text-align: center">
 					<button type="submit" class="btn btn-primary">Add</button>
 				</div>
 			</form>
+
 		</div>
 	</div>
 

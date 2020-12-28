@@ -1,6 +1,5 @@
 package com.sshProject.entity;
 
-import java.util.Arrays;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -35,8 +34,8 @@ public class Ers_reimbursement {
 	@Column(name = "reimb_description")
 	private String reimb_description;
 
-	@Column(name = "receipt", columnDefinition = "BLOB")
-	private byte[] receipt;
+	@Column(name = "receipt")
+	private String receipt;
 
 	@ManyToOne
 	@JoinColumn(name = "ers_author")
@@ -94,11 +93,11 @@ public class Ers_reimbursement {
 		this.reimb_description = reimb_description;
 	}
 
-	public byte[] getReceipt() {
+	public String getReceipt() {
 		return receipt;
 	}
 
-	public void setReceipt(byte[] receipt) {
+	public void setReceipt(String receipt) {
 		this.receipt = receipt;
 	}
 
@@ -138,8 +137,8 @@ public class Ers_reimbursement {
 	public String toString() {
 		return "Ers_reimbursement [reimb_id=" + reimb_id + ", reimb_amount=" + reimb_amount + ", reimb_submitted="
 				+ reimb_submitted + ", reimb_resolved=" + reimb_resolved + ", reimb_description=" + reimb_description
-				+ ", receipt=" + Arrays.toString(receipt) + ", ers_author=" + ers_author + ", ers_resolver="
-				+ ers_resolver + ", reim_type_id=" + reim_type_id + ", reimb_status_id=" + reimb_status_id + "]";
+				+ ", receipt=" + receipt + ", ers_author=" + ers_author + ", ers_resolver=" + ers_resolver
+				+ ", reim_type_id=" + reim_type_id + ", reimb_status_id=" + reimb_status_id + "]";
 	}
 
 	public Ers_reimbursement() {

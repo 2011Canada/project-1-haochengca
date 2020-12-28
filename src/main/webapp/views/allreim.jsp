@@ -23,6 +23,7 @@
 </head>
 <body style="margin: 100px">
 
+
 	<div class="container"
 		style="background: linear-gradient(to right, #7A88FF, #7AFFAF)">
 		<div class="col">
@@ -35,7 +36,9 @@
 					<span class="badge badge-secondary">Hi,${user.ers_username}
 					</span>
 				</h2>
-				<button onclick="javascript:window.location.href='${pageContext.request.contextPath }/logout.action'" type="button" class="btn btn-info">logout</button>
+				<button
+					onclick="javascript:window.location.href='${pageContext.request.contextPath }/logout.action'"
+					type="button" class="btn btn-info">logout</button>
 
 			</div>
 
@@ -44,7 +47,8 @@
 					<thead>
 						<tr class="text-center">
 							<th scope="col">Reimb_id</th>
-							<th scope="col"><c:if test="${user.user_role_id.ers_user_role_id==1}">UserName</c:if></th>
+							<th scope="col"><c:if
+									test="${user.user_role_id.ers_user_role_id==1}">UserName</c:if></th>
 							<th scope="col">Reimb_type</th>
 							<th scope="col">Amount</th>
 							<th scope="col">Status</th>
@@ -52,7 +56,9 @@
 							<th scope="col">Resolve time</th>
 							<th scope="col">Resolver</th>
 							<th scope="col">Description</th>
-							<th  scope="col"><c:if test="${user.user_role_id.ers_user_role_id==1}">Action</c:if></th>
+							<th scope="col">receipt</th>
+							<th scope="col"><c:if
+									test="${user.user_role_id.ers_user_role_id==1}">Action</c:if></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -61,8 +67,7 @@
 								<td>${ers_reimbursements.reimb_id }</td>
 								<td><c:if test="${user.user_role_id.ers_user_role_id==1}">
 									${ers_reimbursements.ers_author.ers_username }
-								</c:if>
-								</td>
+								</c:if></td>
 								<td>${ers_reimbursements.reim_type_id.reimb_type }</td>
 								<td>${ers_reimbursements.reimb_amount }</td>
 								<td>${ers_reimbursements.reimb_status_id.reimb_status }</td>
@@ -70,26 +75,30 @@
 								<td>${ers_reimbursements.reimb_resolved }</td>
 								<td>${ers_reimbursements.ers_resolver.ers_username }</td>
 								<td>${ers_reimbursements.reimb_description }</td>
-								<td><c:if test="${user.user_role_id.ers_user_role_id==1&&ers_reimbursements.reimb_status_id.reimb_status=='pending'}">
-									<button type="button" id="approve"
-										class="btn btn-success btn-sm" onclick="javascript:window.location.href='${pageContext.request.contextPath }/approve.action?id=${ers_reimbursements.reimb_id }&&flag=3'">approve</button>
-									<button type="button" id="deny"
-										class="btn btn-danger btn-sm"  onclick="javascript:window.location.href='${pageContext.request.contextPath }/approve.action?id=${ers_reimbursements.reimb_id }&&flag=2'">deny</button>
-								</c:if>
-								</td>
+								<td><img class="dialog" style="width: 50px" " alt=""
+									src="/project1/img/${ers_reimbursements.receipt}">
+									<div id="dialog_large_image"></div></td>
+								<td><c:if
+										test="${user.user_role_id.ers_user_role_id==1&&ers_reimbursements.reimb_status_id.reimb_status=='pending'}">
+										<button type="button" id="approve"
+											class="btn btn-success btn-sm"
+											onclick="javascript:window.location.href='${pageContext.request.contextPath }/approve.action?id=${ers_reimbursements.reimb_id }&&flag=3'">approve</button>
+										<button type="button" id="deny" class="btn btn-danger btn-sm"
+											onclick="javascript:window.location.href='${pageContext.request.contextPath }/approve.action?id=${ers_reimbursements.reimb_id }&&flag=2'">deny</button>
+									</c:if></td>
 							</tr>
 						</c:forEach>
 
 					</tbody>
+					<div class="container" style="z-index: 100" id="dialog_large_image"></div>
 				</table>
+
 
 			</table>
 		</div>
 	</div>
 
-	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-		crossorigin="anonymous"></script>
+	<script src="js/jquery.js"></script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
@@ -103,6 +112,29 @@
 							window.location.href = "${pageContext.request.contextPath }/add.jsp";
 
 						});
+		$(function() {
+			$("img.dialog").click(
+					function() {
+						var large_image = '<img src= ' + $(this).attr("src")
+								+ '></img>';
+						$('#dialog_large_image').html($(large_image).animate({
+							height : '80%',
+							width : '80%'
+						}, 500));
+					});
+		});
+
+		$(function() {
+			$("#dialog_large_image").click(
+					function() {
+						var large_image = '<img src= ' + $(this).attr("src")
+								+ '></img>';
+						$('#dialog_large_image').html($(large_image).animate({
+							height : '0%',
+							width : '0%'
+						}, 500));
+					});
+		});
 	</script>
 
 

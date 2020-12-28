@@ -1,8 +1,10 @@
 package com.sshProject.controller;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.sshProject.entity.Ers_reimbursement;
 import com.sshProject.entity.Ers_reimbursement_status;
@@ -45,7 +48,22 @@ public class LoginAction {
 	}
 
 	@RequestMapping("/add")
-	public String newReim(Ers_reimbursement ers_reimbursement, HttpSession session) {
+	public String newReim(Ers_reimbursement ers_reimbursement, HttpSession session, MultipartFile file)
+			throws Exception {
+
+		String filename = file.getOriginalFilename();
+
+		String uuid = UUID.randomUUID().toString();
+		filename = uuid + filename;
+
+		File serverFile = new File(
+				"C:\\Users\\xuhao\\git\\project-1-haochengca\\src\\main\\webapp\\static\\img" + "/" + filename);
+		if (!serverFile.exists()) {
+			// 判断如果不存在创建
+			serverFile.mkdirs();
+		}
+
+		file.transferTo(serverFile);
 
 		Ers_users u = (Ers_users) session.getAttribute("user");
 
@@ -65,6 +83,7 @@ public class LoginAction {
 		Date date = new Date();// 获取当前时间
 
 		ers_reimbursement.setReimb_submitted(date);
+		ers_reimbursement.setReceipt(filename);
 
 		ersUserService.add(ers_reimbursement);
 
@@ -127,6 +146,27 @@ public class LoginAction {
 		ersUserService.approve(ers_reimbursement);
 
 		return "redirect:allreim.action";
+	}
+
+	@RequestMapping("/upload")
+	public String upload(MultipartFile file, HttpServletRequest request) throws Exception {
+
+		String filename = file.getOriginalFilename();
+
+		String uuid = UUID.randomUUID().toString();
+		filename = uuid + filename;
+
+		File serverFile = new File(
+				"C:\\Users\\xuhao\\git\\project-1-haochengca\\src\\main\\webapp\\static\\img" + "/" + filename);
+		if (!serverFile.exists()) {
+			// 判断如果不存在创建
+			serverFile.mkdirs();
+		}
+
+		file.transferTo(serverFile);
+
+		return "forward:add.action";
+
 	}
 
 }
