@@ -26,7 +26,7 @@
 				<span>Add reimbursement</span>
 			</h1>
 
-			<form class="col-sm-12 col-lg-2 m-auto align-items-center"
+			<form class="col-sm-12 col-lg-4 m-auto align-items-center"
 				action="${pageContext.request.contextPath }/add.action"
 				method="post" enctype="multipart/form-data">
 				<div class="form-group">

@@ -118,8 +118,8 @@
 						var large_image = '<img src= ' + $(this).attr("src")
 								+ '></img>';
 						$('#dialog_large_image').html($(large_image).animate({
-							height : '80%',
-							width : '80%'
+							height : '100%',
+							width : '100%'
 						}, 500));
 					});
 		});
