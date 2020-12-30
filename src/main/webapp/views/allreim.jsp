@@ -109,7 +109,7 @@
 						'click',
 						function() {
 
-							window.location.href = "${pageContext.request.contextPath }/add.jsp";
+							window.location.href = "${pageContext.request.contextPath }/views/add.jsp";
 
 						});
 		$(function() {
