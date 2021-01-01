@@ -2,6 +2,7 @@ package com.sshProject.controller;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -23,14 +25,15 @@ import com.sshProject.service.ErsUserService;
 import com.sshProject.util.PassUtil;
 
 @Controller
-public class LoginAction {
+public class Controllers {
 
 	@Autowired
 	private ErsUserService ersUserService;
 
 	@RequestMapping("/allreim")
-	public String allReim(HttpSession session, Model model) {
+	public String allReim(HttpSession session, Model model, Integer status) {
 		List<Ers_reimbursement> ers_reimbursements = null;
+		List<Ers_reimbursement> ret = new ArrayList<Ers_reimbursement>();
 		Ers_users u = (Ers_users) session.getAttribute("user");
 
 		if (u == null) {
@@ -43,7 +46,19 @@ public class LoginAction {
 		} else if (u.getUser_role_id().getErs_user_role_id() == 1) {
 			ers_reimbursements = ersUserService.allreim();
 		}
-		model.addAttribute("ers_reimbursements", ers_reimbursements);
+		System.out.println(status);
+		if (!StringUtils.isEmpty(status)) {
+			for (Ers_reimbursement ers_reimbursement : ers_reimbursements) {
+				if (ers_reimbursement.getReimb_status_id().getReimb_status_id() == status) {
+					ret.add(ers_reimbursement);
+				}
+			}
+
+		} else {
+			ret = ers_reimbursements;
+		}
+		model.addAttribute("ers_reimbursements", ret);
+
 		return "allreim";
 	}
 

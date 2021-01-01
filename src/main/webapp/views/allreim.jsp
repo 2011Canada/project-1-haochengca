@@ -32,6 +32,22 @@
 					<button type="button" id="newreim" class="btn btn-success col-lg-2">New
 						Reimb</button>
 				</c:if>
+				<button type="button" id="approve"
+											class="btn btn-warning col-lg-1 btn-sm"
+											onclick="javascript:window.location.href='${pageContext.request.contextPath }/allreim.action'">all</button>
+				
+				<button type="button" id="approve"
+											class="btn btn-warning btn-sm col-lg-1"
+											onclick="javascript:window.location.href='${pageContext.request.contextPath }/allreim.action?status=1'">pending</button>
+				
+				<button type="button" id="approve"
+											class="btn btn-warning btn-sm col-lg-1"
+											onclick="javascript:window.location.href='${pageContext.request.contextPath }/allreim.action?status=2'">deny</button>
+				
+				<button type="button" id="approve"
+											class="btn btn-warning btn-sm col-lg-1"
+											onclick="javascript:window.location.href='${pageContext.request.contextPath }/allreim.action?status=3'">approve</button>
+				
 				<h2 class="col-lg-2 ml-auto">
 					<span class="badge badge-secondary">Hi,${user.ers_username}
 					</span>
